@@ -1,0 +1,39 @@
+html
+  head
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+    script(src="http://code.jquery.com/ui/jquery-ui-git.js")
+
+body
+  a(href= "/") Etusivulle
+  br
+  h1 Kuukausiraportti
+  p Syötä kuukausi, vuosi ja mainostajan nimi
+  form(name="queryform", action="/kuukausiraportti/", method="post")
+    input(type="number", name="kk", min="1", max="12", value="1")#input
+    input(type="number", name="vuosi", min="1900", max="2020", value="2020")#input
+    br
+    textarea(name="nimi") Mattoaitta Oy
+    br
+    input(type="submit", name="execquery", value="Hae tiedot")
+    
+  a(href="/kuukausiraportti") Hae kaikki kuukausiraportit
+  br
+
+if error  
+  p #{error}
+
+//- Print the results in a html table by iterating the query results.
+else if (result && result.fields.length >= 1) 
+  table
+    thead
+      tr
+        //- First print field names as table headers.
+        each field in result.fields
+          th: p= field.name
+    tbody
+      //- Then print values in the resulting rows.
+      each row in result.rows
+        tr
+          each value in row
+            td: p= value
+  

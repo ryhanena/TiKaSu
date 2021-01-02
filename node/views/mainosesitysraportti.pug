@@ -1,0 +1,60 @@
+html
+  head
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+    script(src="http://code.jquery.com/ui/jquery-ui-git.js")
+
+body
+a(href="/") Linkki etusivulle
+br
+h1 mainosesitysraportti
+//- esityspaiva ja aika, sukupuoli, ikä, maa, paikkakunta, kappale,
+//- esittäjä, genre
+
+p= 'Annan mainoksen nimi ja valitse sisältö'
+br
+form(name="queryform", action="/mainosesitysraportti/", method="post")
+  input(type="textarea", name="mainoksennimi", value="Aito matto")
+  br
+  input(type="checkbox", name="esityspaiva", checked="checked")
+  | Esityspaiva
+  br
+  input(type="checkbox", name="sukupuoli", checked="checked")
+  | Sukupuoli
+  br
+  input(type="checkbox", name="ika", checked="checked")
+  | Ika
+  br
+  input(type="checkbox", name="maa", checked="checked")
+  | Maa
+  br
+  input(type="checkbox", name="paikkakunta", checked="checked")
+  | Paikkakunta
+  br
+  input(type="checkbox", name="kappale", checked="checked")
+  | Kappale
+  br
+  input(type="checkbox", name="esittaja", checked="checked")
+  | Esittaja
+  br
+  input(type="checkbox", name="genre", checked="checked")
+  | Genre
+  br
+  input(type="submit", name="execquery", value="Hae tiedot")
+
+if error  
+  p #{error}
+
+//- Print the results in a html table by iterating the query results.
+else if result 
+  table
+    thead
+      tr
+        //- First print field names as table headers.
+        each field in result.fields
+          th: p= field.name
+    tbody
+      //- Then print values in the resulting rows.
+      each row in result.rows
+        tr
+          each value in row
+            td: p= value

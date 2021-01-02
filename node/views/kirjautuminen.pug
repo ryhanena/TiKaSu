@@ -1,0 +1,22 @@
+html
+    head
+        title= title
+            script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+            script(src="http://code.jquery.com/ui/jquery-ui-git.js")
+    body
+        .container
+            .row
+             .col-md-4.offset-md-4#loginbox
+                .account-wall
+                br
+                form(class='form-signin', action='/kirjautuminen', method='POST')
+                    input(type='text', name='username' class='form-control', placeholder='kayttajanimi',required, autofocus)
+                    br
+                    input(type='password', name='password' class='form-control', placeholder='salasana', required)
+                    br
+                    input(type='checkbox', name='muista', placeholder='Muista minut')
+                    | Remember me
+                    br
+                    input(type="submit", name="execquery", value="kirjaudu")
+                    span.clearfix
+            //-a(href='/uusi', class='text-center new-account') Luo uusi kayttaja

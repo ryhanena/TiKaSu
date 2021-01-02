@@ -1,0 +1,49 @@
+
+html
+  head
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+    script(src="http://code.jquery.com/ui/jquery-ui-git.js")
+body
+a(href="/") Etusivulle
+br
+h1 Laskutus
+br
+a(href="/laskutusnakyma/lisays") Laskuttamattomat mainoskampanjat
+br
+a(href="/laskutusnakyma") Maksamattomat laskut talla hetkella
+
+
+if err
+  p #{error}
+
+else if resultLaskut
+  h2 Maksamattomat laskut talla hetkella 
+  table
+    thead
+      tr
+        //- First print field names as table headers.
+        each field in resultLaskut.fields
+          th: p= field.name
+    tbody
+      //- Then print values in the resulting rows.
+      each row in resultLaskut.rows
+        tr
+          each value in row
+            td: p= value
+
+else if uusilaskuresult
+  h2 Mainoskampanjat, joista ei ole lahetetty laskua
+  table
+    thead
+      tr
+        //- First print field names as table headers.
+        each field in uusilaskuresult.fields
+          th: p= field.name
+    tbody
+      //- Then print values in the resulting rows.
+      each row in uusilaskuresult.rows
+        tr
+          each value in row
+            td: p= value              
+
+

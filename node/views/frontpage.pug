@@ -1,0 +1,32 @@
+
+html
+  head
+    title= title
+    //- Inline Javascript example
+    script.
+      function myFunction() {
+        window.alert("Näin voi kirjoittaa omia funktioita jos tarvitsee.")
+      }
+    //- Include Javasript libraries:  
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+    script(src="http://code.jquery.com/ui/jquery-ui-git.js")
+    script.
+      $( function() {
+        $( "#datepicker" ).datepicker({
+          dateFormat: "dd-mm-yy"
+        });      
+      } );
+  
+
+  body
+    //-button(onclick="myFunction()") Nappula esim
+    h1= title
+    a(href="/kuukausiraportti") Kuukausiraportti
+    //- br = rivinvaihto
+    br 
+    a(href="/mainosesitysraportti") Mainosesitysraportti
+    br
+    a(href="/laskutusnakyma") Laskutus
+    br
+
+      //- Print error message
